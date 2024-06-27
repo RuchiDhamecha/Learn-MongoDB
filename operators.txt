@@ -1,0 +1,154 @@
+// db. -- . find = returns cursor
+
+
+Logical operator
+
+
+db.people.find({age:21}).size();
+58
+db.people.find({age:[21,22]}).size();
+0
+db.people.find({age:{$ne:21}}).size(); //not equal to
+942
+db.people.find({age:{$gt :21}}).size();
+896
+db.people.find({age:{$gte :21}}).size(); //greater than euqal to
+954
+db.people.find({age:{$in :[21,22]}}).size();
+
+db.people.find({age:{$nin :[21,22]}}).size(); //not in
+
+db.people.find({gender:{$lt :"male"}}).size();
+
+db.people.find({isActive:{$lt :true}}).size();
+
+
+
+
+Projection operator
+
+db.students.find({"grades.0":{$gte:85}},
+                 {"grades":{$slice:1}})
+//gives 1st element of array having grades array 1st ele >= 85
+
+
+db.students.find({"grades.0":{$gte:85}},
+                 {"grades":{$slice:[0,2]}})
+//grades.0 , 1st element of array grades
+//slice array-
+//1st starting index
+//2nd no. of elements
+
+
+db.students.find({semester:1,grades:{$gte:85}},
+                 {"grades.$":1})
+
+
+=================================================================================
+Logical operator
+
+
+//and operator 
+// when we have 2 condition
+
+//using , it just checks 2nd condition
+
+db.persons.find({
+$and : [
+  {age:{$gt: 30}},{age:{$lt: 25}}
+]
+}).size();
+
+
+//OR operator
+
+db.persons.find({
+$or : [
+  {age:{$gt: 30}},{age:{$lt: 25}}
+]
+}).size();
+
+
+//NOT
+
+
+//NOR
+db.persons.find
+({
+$nor:[{"gender":"female"},{"eyeColor":"brown"}]
+}).size();
+
+======================================================================================
+Evaluation Operaors
+
+//expr
+
+db.employee.find({$expr:{$gt:
+["$spent","$budget"]
+}})
+
+//spent feild > budget field
+
+
+//mod - remainder
+
+db.employee.find({
+"spent":{$mod:[3,0]
+}}).size()
+
+//regex- regular expression
+
+db.employee.find({
+category:{$regex:/fo/}
+})
+
+
+db.employee.find({
+$text:{$search:"food"}
+})
+
+
+==================================================================================
+
+db.persons.find({
+isActive:{$exists:true}
+}).size();
+
+
+db.persons.find({
+isActive:{$exists:true,$eq:true}
+}).size();
+
+
+db.persons.find({
+isActive:{$type:"bool"}
+}).size();
+
+
+array operator
+
+size operator
+
+db.persons.find({
+tags:{$size: 3}
+}).size();
+
+
+all
+
+db.persons.find({
+tags:{$all:["veniam","proident"]}
+}).size()
+
+
+
+elemMatch
+
+db.books.find({
+authors:{
+$elemMatch:{
+name:"Alice",
+age:35
+}
+}
+})

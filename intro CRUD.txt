@@ -1,0 +1,104 @@
+Create-
+
+	insertOne
+	insertMany
+
+db.people.insertOne({})
+{
+  acknowledged: true,
+  insertedId: ObjectId('65c9b723fa086f9f8faf4c59')
+}
+db.people.insertOne("ruchi")
+{
+  acknowledged: true,
+  insertedId: ObjectId('65c9b731fa086f9f8faf4c5a')
+}
+db.people.insertOne(1)
+{
+  acknowledged: true,
+  insertedId: ObjectId('65c9b73ffa086f9f8faf4c5b')
+}
+db.people.insertOne([])
+{
+  acknowledged: true,
+  insertedId: ObjectId('65c9b766fa086f9f8faf4c5c')
+}
+db.people.insertOne([1,2,3])
+{
+  acknowledged: true,
+  insertedId: ObjectId('65c9b76ffa086f9f8faf4c5d')
+}
+db.people.insertOne(null)
+{
+  acknowledged: true,
+  insertedId: ObjectId('65c9b798fa086f9f8faf4c5e')
+}
+doesn't work with undefined only.
+
+
+db.people.insertMany([{},{},{}])
+========================================================================================
+READ -
+
+	find
+	findOne
+db.people.find()
+{
+  _id: ObjectId('65c9b723fa086f9f8faf4c59')
+}
+{
+  '0': 'r',
+  '1': 'u',
+  '2': 'c',
+  '3': 'h',
+  '4': 'i',
+  _id: ObjectId('65c9b731fa086f9f8faf4c5a')
+}
+{
+  _id: ObjectId('65c9b73ffa086f9f8faf4c5b')
+}
+{
+  _id: ObjectId('65c9b766fa086f9f8faf4c5c')
+}
+{
+  '0': 1,
+  '1': 2,
+  '2': 3,
+  _id: ObjectId('65c9b76ffa086f9f8faf4c5d')
+}
+{
+  _id: ObjectId('65c9b798fa086f9f8faf4c5e')
+}
+
+========================================================================
+Update-
+
+	updateOne
+	updateMany
+============================================================================
+Delete -
+
+	deleteOne
+	deleteMany
+delete db.dropDatabase
+true
+db.dropDatabase()
+{ ok: 1, dropped: 'eltp-b1' }
+
+db.people.deleteOne({});
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+
+db.people.deleteMany({});
+{
+  acknowledged: true,
+  deletedCount: 8
+}
+
+db.people.find();
+-
+
+
+db.persons.deleteMany({"company.location.country":"Italy"})

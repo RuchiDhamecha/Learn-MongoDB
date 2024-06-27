@@ -1,0 +1,42 @@
+// $unset
+// The $unset operator deletes a particular field.
+
+db.practice.updateOne({index:1},{$unset:{isActive:""}})
+
+db.practice.find({index:1}
+
+in case of arry it gives null value instead, 
+
+// setOnInser -- upsert
+
+db.practice2.updateOne({index:22},{$setOnInsert:{name:"ruchi"}},{upsert:true})
+
+
+//  $
+The positional operator 
+identifies an element in an array to update without explicitly specifying the position of the element in the array.
+
+db.practice.updateOne({index:1 , tags:"ut"},{$unset:{"tags.$":""}})
+
+db.practice.updateOne({index:1 , tags:"voluptate"},{$set:{"tags.$":"abc"}})
+
+If the query matches the array using a negation operator, such as $ne, $not, or $nin,
+ then you cannot use the positional operator to update values from this array.
+
+ eleMatch can be used
+
+ // $[]
+The all positional operator $[] indicates that the update operator should modify
+ all elements in the specified array field.
+ 
+
+ //pop
+
+ operator removes the first or last element of an array. Pass 
+
+ a value of -1 to remove the first element of an array 
+ and 1 to remove the last element in an array
+
+ db.practice.updateOne({index:0 , tags:"id"},{$pop:{"tags":-1}})
+ db.practice.findOne({index:0})
+
